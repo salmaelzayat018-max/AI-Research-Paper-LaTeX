@@ -1,0 +1,132 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{ECS200 Workshop Report\\
+{\footnotesize Summing and Difference Amplifiers}}
+
+\author{\IEEEauthorblockN{Done By:}
+\IEEEauthorblockA{\textit{Salma Mohamed Mahmoud Elzayat} \\
+\textit{ Student ID: 1110141}\\
+ College of Engineering\\
+Abu Dhabi University}
+\and
+\IEEEauthorblockN{Instructor name:}
+\IEEEauthorblockA{\textit{Dr. Gasm Elbary Hassan} \\
+\textit{Subject: }\\
+Introduction to Engineering and Computing\\
+Abu Dhabi University}}
+
+\maketitle
+
+\begin{abstract}
+This experiment evaluates the operational behavior of summing and difference amplifier circuits constructed using the LM741 operational amplifier and the NI myDAQ platform. In the first exercise, a weighted summing amplifier was designed and tested on three distinct combinations of input voltages and resistor values ($R_f$, $R_1$, $R_2$). The measured DC output voltages were compared with theoretical calculations, yielding percentage errors ranging from $0.95\%$ to $8.77\%$. In the second exercise, a difference amplifier was configured with two AC input signals ($V_1 = +5{ V}_p$ and $V_2 = -5{ V}_p$). For a calculated input difference of $10.000{ V}$, the measured output voltage was $10.049{ V}$ ($20.098{ V}_{pp}$), demonstrating an experimental circuit gain of $1.005$. The findings validate the theoretical mathematical operations of summing and difference op-amp configurations within low error margins.  
+\end{abstract}
+
+
+
+\section{Introduction}
+Operational amplifiers are the foundational components in modern analog circuit design used for signal conditioning and arithmetic computations\cite{b3}. This report presents the implementation and performance evaluation of the summing and difference amplifier circuits constructed using the LM741 op-amp and the NI myDAQ platform\cite{b1,b3}.
+
+\subsection{Background and Objectives}
+Operational amplifiers (op-amps) are fundamental building blocks in analog electronics, widely utilized for signal processing, filtering, and performing mathematical operations\cite{b3}. The LM741 is an eight-pin operational amplifier IC commonly used to construct summing and difference amplifiers \cite{b3}. Pin 6 serves as the output, while pins 2 and 3 serve as the inverting and non-inverting inputs, respectively\cite{b3}. Pin 8 remains unused, and supply voltages are applied to pins 4 and 7 \cite{b3}.  For the summing amplifier configuration, the output voltage is governed by the relation\cite{b1}:
+
+\begin{equation}
+V_{out} = -R_f \left( \frac{V_1}{R_1} + \frac{V_2}{R_2} \right)
+\label{eq:sample}
+\end{equation}
+where $R_f$ represents the feedback resistor, $R_1$ and $R_2$ represent the input resistors, and $V_1$ and $V_2$ represent the input voltages as sown in\cite{b1}.
+
+
+\subsection{Equipment Used}
+The hardware components and tools utilized during this experiment, as shown in \autoref{fig:required_equipment}:
+\begin{itemize}
+\item NI myDAQ
+\item myDigital Protoboard 
+\item 741 Operational Amplifier IC (LM741) 
+\item Resistors: $3.3\Omega$, $4.7\Omega$, $10\Omega$, $22 k\Omega$, $47\Omega$, $100\Omega$, and $330\Omega$. 
+\item  Multimeter leads and jumper wires. 
+\end{itemize}
+
+\begin{figure}[htbp]
+\centerline{
+\includegraphics[width=0.9\linewidth]{pics/equipment.jpg}}
+\caption{Equipment Used}
+\label{fig:required_equipment}
+\end{figure}
+\section{Design}
+
+\subsection{Exercise 1—Summing Amplifier}
+The weighted summing amplifier circuit was designed by placing the LM741 operational amplifier chip on the myDigital Protoboard\cite{b2}. Operational supply voltages were provided by connecting Pin 7 to $+15{ V}$ and Pin 4 to $-15{ V}$, while Pin 3 (non-inverting input) was tied directly to ground as shown in\cite{b3}. A feedback resistor ($R_f$) was connected between Pin 2 (inverting input) and Pin 6 (output)\cite{b1}. Input resistor $R_1$ was wired from Pin 2 to a fixed $+5{ V}$ DC source ($V_1$), and $R_2$ was wired from Pin 2 to analog output AO-0 to supply $V_2$ ranging from $-10{ V}$ to $+10{ V}$ \cite{b1}. Channel AO-0 was jumpered to AI-0+ to monitor input and output waveforms concurrently\cite{b1}. Output DC voltages at Pin 6 were measured using the NI myDAQ digital voltmeter with the red lead connected to "V" and the black lead to "COM", as shown in \autoref{fig:ex1}
+\begin{figure}[htbp]
+\centerline{%
+\includegraphics[width=0.8\linewidth]{pics/ex1_circuit.jpg}%
+}
+\caption{Summing amplifier circuit connections. .}
+\label{fig:ex1}
+\end{figure}
+
+\subsection{Exercise 2—Difference Amplifier}
+The difference amplifier circuit was constructed on the myDigital Protoboard to analyze the output waveform, peak-to-peak voltage ($V_{pp}$), and circuit gain\cite{b2}. Operational supply voltages of $+15{ V}$ and $-15{ V}$ were supplied to Pin 7 and Pin 4 of the LM741 IC, respectively\cite{b3}. The circuit was driven using two AC input signals configured as $V_1 = +5{ V}_p$ and $V_2 = -5{ V}_p$, yielding a calculated input differential voltage $(V_2 - V_1)$ of $10{ V}$\cite{b1}. Pin 6 (output) was connected to the AI-0+ channel of the NI myDAQ to observe the output waveform concurrently with the input on the virtual oscilloscope, as shown in\cite{b1}. The measured peak-to-peak output voltage ($V_{pp}$) was recorded and compared against the calculated input differential voltage to evaluate circuit gain and operational response\cite{b1}.
+
+\section{Experimental Testing and Results}
+The constructed operational amplifier circuits were tested experimentally using the NI myDAQ virtual instruments to evaluate performance against theoretical calculations.
+\subsection{Exercise 1—Summing Amplifier}
+The summing amplifier was evaluated across six resistor and input voltage ($V_2$) combinations by comparing theoretical values from \autoref{eq:sample} with DC voltages measured via the NI myDAQ digital voltmeter, as shown in \autoref{tab:table1} and \autoref{fig:result}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Summing Amplifier Experimental Results}
+    \label{tab:table1}
+
+    \resizebox{0.97\linewidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{$R_f$ (k$\Omega$)} & \textbf{$R_1$ (k$\Omega$)} & \textbf{$R_2$ (k$\Omega$)} & \textbf{$V_1$ (V)} & \textbf{$V_2$ (V)} & \textbf{Calculated $V_{out}$ (V)} & \textbf{Measured $V_{out}$ (V)} & \textbf{\% Error} \\ \hline
+        47 & 100 & 330 & $+5$ & $+2$ & $-2.635$ & $-2.610$ & 0.95 \\ \hline
+        22 & 22 & 47 & $+5$ & $-10$ & $-0.319$ & $-0.291$ & 8.77 \\ \hline
+        3.3 & 10 & 4.7 & $+5$ & $+5$ & $-5.161$ & $-5.013$ & 2.86 \\ \hline
+    \end{tabular}
+    }
+\end{table}
+
+\begin{figure}[htbp]
+\centerline{%
+\includegraphics[width=0.7\linewidth]{pics/ex1_oscilloscope.jpg}%
+}
+\caption{Output signal (2 $V_p$) displayed with the input signal (5 $V_p$) on the oscilloscope}
+\label{fig:result}
+\end{figure}
+
+\subsection{Exercise 2—Difference Amplifier}
+The difference amplifier was tested using two complementary AC input signals ($V_1 = +5{ V}_p$, $V_2 = -5{ V}_p$) to record input differential voltage, peak-to-peak output voltage ($V_{pp}$), and differential gain on the NI myDAQ virtual oscilloscope, as shown in \autoref{tab:table2}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Difference Amplifier Experimental Results}
+    \label{tab:table2}
+    \resizebox{0.96\linewidth}{!}{
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Calculated $V_2 - V_1$ (V)} & \textbf{Measured $V_{pp}$ (V)} & \textbf{Measured $|V_{out}|$ (V)} & \textbf{Gain ($V_{out} / (V_2 - V_1)$)} \\ \hline
+        10.000 & 20.098 & 10.049 & 1.005 \\ \hline
+    \end{tabular}
+    }
+\end{table}
+
+\section{Conclusion}
+The oscilloscope measurements confirmed that the difference amplifier effectively subtracted the two AC signals while maintaining unified gain. The experimental output amplitude of $10.049{ V}$ ($20.098{ V}_{pp}$) demonstrated an exceptionally low error margin of $0.49\%$ compared to the theoretical $10.000{ V}$ prediction. The output waveform exhibited clean sinusoidal symmetry without noticeable clipping or phase distortion, verifying correct IC biasing and proper common-mode rejection performance\cite{b1,b3}.
+
+
+ 
+\begin{thebibliography}{00}
+\bibitem{b1} USER GUIDE AND SPECIFICATIONS NI myDAQ. (n.d.). National Instruments Corporation.
+\bibitem{b2} myDigital™ Board Reference Manual. (2014, November 14). Mydigital-Rm.
+\bibitem{b3} Subedi, B. (2023). OP amp IC 741 basics, characteristics, pins, applications. How To Electronics. Available at: https://how2electronics.com/op-a
+mpic-lm741-basics-characteristics-pins-applications/
+
+\end{thebibliography}
+
+\end{document}
